@@ -1,0 +1,7 @@
+TEAM_ID=
+
+PRODUCT_NAME=DontClickTheButton
+PRODUCT_BUNDLE_IDENTIFIER=com.antoitoo01.dontclickthebutton.DontClickTheButton$(TEAM_ID)
+
+CURRENT_PROJECT_VERSION=1
+MARKETING_VERSION=1.0
