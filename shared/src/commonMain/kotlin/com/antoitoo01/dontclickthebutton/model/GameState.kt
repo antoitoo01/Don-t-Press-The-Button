@@ -5,47 +5,40 @@ import kotlinx.serialization.Serializable
 import kotlin.collections.emptyMap
 import kotlin.collections.emptySet
 
+
 @Serializable
 data class GameState(
-    // Formato / migración
     val schemaVersion: Int,
-
-    // == CULPA (la moneda visible) ==
-    val guilt: Double,               // culpa actual (visible)
-    val guiltPerTap: Double,         // +culpa por pulso (mejoras runa-local)
-    val guiltPerSecond: Double,      // automatización (mejoras runa-local)
-
-    // == Historial de culpa (para prestigio) ==
-    val accumulatedGuilt: Double,    // culpa total jamás acumulada (nunca baja) → fuente de Cicatrices
-
-    // == CICATRICES (moneda permanente de prestigio) ==
-    val scars: Int,                  // cicatrices totales acumuladas
-
-    // == HABILIDADES PERMANENTES (desbloqueadas con Cicatrices) ==
-    val unlockedSkills: Set<SkillId>,     // habilidades que ya tienes
-    val skillCooldowns: Map<SkillId, Long>, // timestamp de último uso (para cooldown)
-
-    // == Métricas / utilitarias ==
-    val totalTaps: Long,
+    val guilt: Double,
+    val guiltPerTap: Double,
+    val guiltPerSecond: Double,
+    val multiplier: Double,
+    val accumulatedGuilt: Double,
     val totalGuilt: Double,
+    val scars: Int,
+    val ownedUpgrades: Map<String, Int>,
+    val unlockedSkills: Set<String>,
+    val skillCooldowns: Map<String, Long>,
+    val totalTaps: Long,
     val lastSeenEpochMs: Long
 ) {
-
-
     companion object {
+        const val CURRENT_SCHEMA_VERSION = 1
+
         fun initial(): GameState = GameState(
-            schemaVersion = STATE_VERSION,
+            schemaVersion = CURRENT_SCHEMA_VERSION,
             guilt = 0.0,
-            guiltPerTap = 1.0,          // ← CORREGIDO: +1 culpa por tap
-            guiltPerSecond = 0.0,       // sin automatización al inicio
+            guiltPerTap = 1.0,
+            guiltPerSecond = 0.0,
+            multiplier = 1.0,
             accumulatedGuilt = 0.0,
             totalGuilt = 0.0,
             scars = 0,
+            ownedUpgrades = emptyMap(),
             unlockedSkills = emptySet(),
             skillCooldowns = emptyMap(),
             totalTaps = 0L,
             lastSeenEpochMs = 0L
         )
     }
-
 }
