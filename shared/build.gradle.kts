@@ -61,6 +61,7 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.okio)
+            implementation(libs.kotlinx.coroutines.test)
 
 
         }

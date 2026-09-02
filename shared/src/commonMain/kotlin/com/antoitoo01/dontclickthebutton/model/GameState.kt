@@ -1,9 +1,6 @@
 package com.antoitoo01.dontclickthebutton.model
 
-import com.antoitoo01.dontclickthebutton.data.STATE_VERSION
 import kotlinx.serialization.Serializable
-import kotlin.collections.emptyMap
-import kotlin.collections.emptySet
 
 
 @Serializable

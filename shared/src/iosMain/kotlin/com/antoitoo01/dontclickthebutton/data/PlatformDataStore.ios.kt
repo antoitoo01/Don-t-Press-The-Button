@@ -5,10 +5,10 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import kotlinx.cinterop.ExperimentalForeignApi
 import okio.Path.Companion.toPath
+import org.koin.dsl.module
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
 import platform.Foundation.NSUserDomainMask
-import org.koin.dsl.module
 
 @OptIn(ExperimentalForeignApi::class)
 val iosDataStoreModule = module {

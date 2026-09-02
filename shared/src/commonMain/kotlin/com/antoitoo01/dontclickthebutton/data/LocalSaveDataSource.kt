@@ -7,13 +7,19 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-val STATE_VERSION = 1
 val STATE_KEY = stringPreferencesKey("game_state")
 
-class LocalSaveDataSource(private val dataStore: DataStore<Preferences>) {
-    val gameState: Flow<String?> = dataStore.data.map { it[STATE_KEY] }
+interface GameSaveDataSource {
+    val gameState: Flow<String?>
+    suspend fun save(state: String)
+}
 
-    suspend fun save(state: String) {
+class LocalSaveDataSource(
+    private val dataStore: DataStore<Preferences>
+) : GameSaveDataSource {
+    override val gameState: Flow<String?> = dataStore.data.map { it[STATE_KEY] }
+
+    override suspend fun save(state: String) {
         dataStore.edit { it[STATE_KEY] = state }
     }
 }
