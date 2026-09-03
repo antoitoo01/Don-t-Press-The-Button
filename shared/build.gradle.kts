@@ -6,6 +6,8 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.composeHotReload)
+
 }
 
 kotlin {
@@ -25,7 +27,7 @@ kotlin {
        minSdk = libs.versions.android.minSdk.get().toInt()
     
        compilerOptions {
-           jvmTarget = JvmTarget.JVM_11
+           jvmTarget = JvmTarget.JVM_21
        }
        androidResources {
            enable = true
@@ -62,6 +64,7 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.okio)
             implementation(libs.kotlinx.coroutines.test)
+
 
 
         }
